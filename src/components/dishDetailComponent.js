@@ -7,6 +7,7 @@ class DishDetail extends Component {
         super(props);
     }
     renderDish(dish){
+        if (dish != null){
             return (
                 <Card>
                     <CardImg top width="100%" src={dish.image} alt={dish.name}/>
@@ -15,7 +16,11 @@ class DishDetail extends Component {
                     <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
-            );
+            );}
+        else{
+            return(
+            <div></div>
+        );}
         
     }
 
@@ -25,7 +30,7 @@ class DishDetail extends Component {
               return (
               <div key={comments.id}>
                   <p>{commentObj.comment}</p>
-                  <p>-- {commentObj.author} {commentObj.date}</p>
+                  <p>-- {commentObj.author} {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentObj.date)))}</p>
               </div>);
           }
           );
@@ -46,7 +51,9 @@ class DishDetail extends Component {
     }
 
     render() {
+        if (this.props.selectedDish != null){
         return (
+            <div className="container">
             <div className="row">
                 <div className="col-12 col-md-5 m-1">
                     {this.renderDish(this.props.selectedDish)}
@@ -55,9 +62,11 @@ class DishDetail extends Component {
                     {this.renderComments(this.props.selectedDish.comments)}
                 </div>
             </div>
-        );
-        
-}
+            </div>
+        );  }
+        else{
+        return(<div></div>);
+}}
 }
 
 
