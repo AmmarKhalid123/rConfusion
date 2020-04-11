@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import { func } from 'prop-types';
-
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function RenderDish({dish}){
     if (dish != null){
         return (
+            <div className="col-12 col-md-5 m-1">
             <Card>
                 <CardImg top width="100%" src={dish.image} alt={dish.name}/>
                 <CardBody>
@@ -13,6 +13,7 @@ function RenderDish({dish}){
                 <CardText>{dish.description}</CardText>
                 </CardBody>
             </Card>
+            </div>
         );}
     else{
         return(
@@ -30,7 +31,7 @@ function RenderComments({comments}){
           </div>);
       }
       );
-      return  (<div>
+      return  (<div className="col-12 col-md-5 m-1">
             <h4>
                 Comments
             </h4>
@@ -53,12 +54,19 @@ function DishDetail(props){
         return (
             <div className="container">
             <div className="row">
-                <div className="col-12 col-md-5 m-1">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link> </BreadcrumbItem>                        
+                        <BreadcrumbItem active>{props.selectedDish.name}</BreadcrumbItem>
+
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.selectedDish.name}</h3>
+                    </div>
+                </div>
+                                    
+            <div className="row">
                     <RenderDish dish={props.selectedDish}/>
-                </div>
-                <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.selectedDish.comments}/>
-                </div>
+                    <RenderComments comments={props.selectedComments}/>
             </div>
             </div>
         );  }
