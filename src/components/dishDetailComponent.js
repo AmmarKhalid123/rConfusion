@@ -108,7 +108,7 @@ function RenderComments({comments, addComment, dishId}){
     if (comments != null) {
       const commentList = comments.map((commentObj) => {
           return (
-          <div key={comments.id}>
+          <div key={commentObj.id}>
               <p>{commentObj.comment}</p>
               <p>-- {commentObj.author} {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentObj.date)))}</p>
           </div>);
@@ -118,10 +118,11 @@ function RenderComments({comments, addComment, dishId}){
             <h4>
                 Comments
             </h4>
-            <div className="list-unstyled">
+            <ul className="list-unstyled">
                 {commentList}
-                <CommentForm dishId={dishId} addComment={addComment}/>
-            </div>
+                <CommentForm key={dishId} dishId={dishId} addComment={addComment}/>
+            </ul>
+            
         </div>
     );}
     else {
