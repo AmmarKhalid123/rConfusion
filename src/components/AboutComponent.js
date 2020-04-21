@@ -1,34 +1,52 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+import { Fade, Stagger } from 'react-animation-components';
 
-function RenderLeader({leader}) {
-    return (
-        <Media tag="li">
-            <Media left middle>
-                <Media object src={leader.image} alt={leader.name}></Media>
-            </Media>
-            <Media body className="ml-5">
-                <Media heading>
-                {leader.name}
+
+function RenderLeader({leader, isLoading, errMess}) {
+    if (isLoading) {
+        return(
+            <Loading/>
+        );
+    }
+    else if (errMess) {
+        return(
+            <h4>{errMess}</h4>
+        );
+    }
+    else {
+        return (
+            <Media tag="li">
+                <Media left middle>
+                    <Media object src={baseUrl + leader.image} alt={leader.name}></Media>
                 </Media>
-                
-                <p>{leader.designation}</p>
-                
-                {leader.description}
+                <Media body className="ml-5">
+                    <Media heading>
+                    {leader.name}
+                    </Media>
+                    
+                    <p>{leader.designation}</p>
+                    
+                    {leader.description}
+                </Media>
             </Media>
-        </Media>
 
-    );
+        );
+    }
 }
 
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
+    const leaders = props.leaders.leaders.map((leader) => {
         return (
+
             <div key={leader.id} className="col-12 mt-5">
-                <RenderLeader leader={leader}></RenderLeader>
+                <RenderLeader leader={leader} isLoading={props.leaders.isLoading}
+                errMess={props.leaders.isLoading} ></RenderLeader>
             </div>
         );
     });
@@ -88,9 +106,13 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
+                    <Stagger in>
                     <Media list>
+                        <Fade in>
                         {leaders}
+                        </Fade>
                     </Media>
+                    </Stagger>
                 </div>
             </div>
         </div>

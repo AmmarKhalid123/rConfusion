@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, Form, Errors, actions } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -17,8 +17,7 @@ class Contact extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
+        this.props.postFeedback(values);
         this.props.resetFeedbackForm();
     }
     
@@ -59,7 +58,7 @@ class Contact extends Component {
                 <div className="col-12 col-sm-11 offset-sm-1">
                     <div className="btn-group" role="group">
                         <a role="button" className="btn btn-primary" href="tel:+85212345678"><i className="fa fa-phone"></i> Call</a>
-                        <a role="button" className="btn btn-info"><i className="fa fa-skype"></i> Skype</a>
+                        <button className="btn btn-info"><i className="fa fa-skype"></i> Skype</button>
                         <a role="button" className="btn btn-success" href="mailto:confusion@food.net"><i className="fa fa-envelope-o"></i> Email</a>
                     </div>
                 </div>
@@ -133,7 +132,7 @@ class Contact extends Component {
                             <Label htmlFor="email" md={2}>Email</Label>
                             <Col md={10}>
                                 <Control.text model=".email" type="email" id="email" name="email"
-                                placeholder="Email" class="form-control" validators={{
+                                placeholder="Email" className="form-control" validators={{
                                     required, validEmail
                                 }} />
                                 <Errors
