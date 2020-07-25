@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## TL:DR;
+## Initializing;
 Just type the command to start the project:
 - npm install
 - npm start
