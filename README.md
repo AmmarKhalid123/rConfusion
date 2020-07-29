@@ -1,17 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Initializing;
+## Initializing
 
-# Pre-requisites:
+# Pre-requisites
 - Have yarn installed. If not, visit https://yarnpkg.com/ to download
 - Have json-server installed. If not, type the following in the terminal:
 yarn install --global json-server
 
-1. In the root folder, type the following command:
+# To Start
+- In the root folder, type the following command:
 yarn install
-1. Go into json-server folder, open terminal and type the following command:
+- Go into json-server folder, open terminal and type the following command:
 json-server --watch db.json -p 3001
-2. In the root folder, type the following command:
+- In the root folder, type the following command:
 yarn start
 
 
